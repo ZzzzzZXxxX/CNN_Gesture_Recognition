@@ -21,42 +21,7 @@ python3.7/site-packages/numpy/lib/arraypad.py,打开文件后，在954后添加�
 ```
 
 def _normalize_shape(ndarray, shape, cast_to_int=True):
-    """
-    Private function which does some checks and normalizes the possibly
-    much simpler representations of ‘pad_width‘, ‘stat_length‘,
-    ‘constant_values‘, ‘end_values‘.
-
-    Parameters
-    ----------
-    narray : ndarray
-        Input ndarray
-    shape : {sequence, array_like, float, int}, optional
-        The width of padding (pad_width), the number of elements on the
-        edge of the narray used for statistics (stat_length), the constant
-        value(s) to use when filling padded regions (constant_values), or the
-        endpoint target(s) for linear ramps (end_values).
-        ((before_1, after_1), ... (before_N, after_N)) unique number of
-        elements for each axis where `N` is rank of `narray`.
-        ((before, after),) yields same before and after constants for each
-        axis.
-        (constant,) or val is a shortcut for before = after = constant for
-        all axes.
-    cast_to_int : bool, optional
-        Controls if values in ``shape`` will be rounded and cast to int
-        before being returned.
-
-    Returns
-    -------
-    normalized_shape : tuple of tuples
-        val                               => ((val, val), (val, val), ...)
-        [[val1, val2], [val3, val4], ...] => ((val1, val2), (val3, val4), ...)
-        ((val1, val2), (val3, val4), ...) => no change
-        [[val1, val2], ]                  => ((val1, val2), (val1, val2), ...)
-        ((val1, val2), )                  => ((val1, val2), (val1, val2), ...)
-        [[val ,     ], ]                  => ((val, val), (val, val), ...)
-        ((val ,     ), )                  => ((val, val), (val, val), ...)
-
-    """
+    
     ndims = ndarray.ndim
 
     # Shortcut shape=None
@@ -81,36 +46,7 @@ def _normalize_shape(ndarray, shape, cast_to_int=True):
 
 
 def _validate_lengths(narray, number_elements):
-    """
-    Private function which does some checks and reformats pad_width and
-    stat_length using _normalize_shape.
-
-    Parameters
-    ----------
-    narray : ndarray
-        Input ndarray
-    number_elements : {sequence, int}, optional
-        The width of padding (pad_width) or the number of elements on the edge
-        of the narray used for statistics (stat_length).
-        ((before_1, after_1), ... (before_N, after_N)) unique number of
-        elements for each axis.
-        ((before, after),) yields same before and after constants for each
-        axis.
-        (constant,) or int is a shortcut for before = after = constant for all
-        axes.
-
-    Returns
-    -------
-    _validate_lengths : tuple of tuples
-        int                               => ((int, int), (int, int), ...)
-        [[int1, int2], [int3, int4], ...] => ((int1, int2), (int3, int4), ...)
-        ((int1, int2), (int3, int4), ...) => no change
-        [[int1, int2], ]                  => ((int1, int2), (int1, int2), ...)
-        ((int1, int2), )                  => ((int1, int2), (int1, int2), ...)
-        [[int ,     ], ]                  => ((int, int), (int, int), ...)
-        ((int ,     ), )                  => ((int, int), (int, int), ...)
-
-    """
+    
     normshp = _normalize_shape(narray, number_elements)
     for i in normshp:
         chk = [1 if x is None else x for x in i]
