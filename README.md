@@ -10,7 +10,7 @@ python test.py
 
 </br>
 </br>
-#### 内有中文注释,训练迭代数可自行调大
+#### 内有中文注释,训练迭代数可自行调大 <br/>
 如遇到以下报错</br>
 ```
 cannot import name '_validate_lengths' from 'numpy.lib.arraypad'
