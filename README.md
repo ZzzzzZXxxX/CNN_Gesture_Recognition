@@ -18,7 +18,7 @@ cannot import name '_validate_lengths' from 'numpy.lib.arraypad'
 原因：</br>
 这是在解决skimage0.15版本后出现的问题。找不到_validate_lengths函数，在arraypad.py文件中确实找不到对应的函数，所以找到以前配置过的环境中对应的文件，拷贝这个缺失的函数。<br/>
 python3.7/site-packages/numpy/lib/arraypad.py,打开文件后，在954后添加以下代码，保存退出，问题解决。<br/>
-```
+
 
 def _normalize_shape(ndarray, shape, cast_to_int=True):
     
@@ -57,6 +57,6 @@ def _validate_lengths(narray, number_elements):
     return normshp
     
 
-```
+
 
 
